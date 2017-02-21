@@ -60,7 +60,18 @@ namespace VldateSck
             private static bool GetButtonUpInternal(InputLogical logicalInput)
             {
                 bool isUp = false;
-
+                switch (sInputType)
+                {
+                    case InputType.KB_MOUSE:
+                        isUp = GetButtonUpKBM(logicalInput);
+                        break;
+                    case InputType.XBOX_CONTROLLER:
+                        isUp = GetButtonUpXBOX(logicalInput);
+                        break;
+                    default:
+                        Debug.LogError("Not supported input yet.");
+                        break;
+                }
                 return isUp;
             }
 
@@ -131,6 +142,9 @@ namespace VldateSck
                         break;
                     case InputLogical.BACK:
                         isUp = UnityEngine.Input.GetMouseButtonUp(RIGHT_MOUSE_BUTTON) || UnityEngine.Input.GetKeyUp(KeyCode.Escape);
+                        break;
+                    case InputLogical.MENU:
+                        isUp = UnityEngine.Input.GetMouseButtonUp(MIDDLE_MOUSE_BUTTON) || UnityEngine.Input.GetKeyUp(KeyCode.Tab);
                         break;
                     case InputLogical.CANCEL:
                         isUp = UnityEngine.Input.GetKeyUp(KeyCode.Escape);

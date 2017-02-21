@@ -19,6 +19,9 @@ namespace VldateSck
         private AmmoType mAmmoType = AmmoType.None;
 
         [SerializeField]
+        private FireType mFireType = FireType.Regular;
+
+        [SerializeField]
         private VldateSck.Input.InputLogical mFireInput = Input.InputLogical.None;
 
         [SerializeField]
@@ -49,14 +52,18 @@ namespace VldateSck
         private float mVelocity = 10.0f;
 
         [SerializeField]
+        private int mBurstCount = 3;
+
+        [SerializeField]
+        private float mBurstDelay = 0.1f;
+
+        [SerializeField]
         private Projectile mProjectTilePrefab;
         #endregion
 
         // Gun State
         private bool mCanFire = true;
-        private bool mHasFired = false;
-        private float mCurrentShotDelay = 0.0f;
-        private float mShotDelayTicker = 0.0f;
+        private bool mFireButtonDown = false;
 
         // Reticule
         private Vector3 mMousePositionWS = Vector3.zero;
@@ -73,7 +80,6 @@ namespace VldateSck
 
         public void Enable()
         {
-            mCurrentShotDelay = mShotDelayStart;
             VldateSck.InputManager.Instance.AddInputListener(OnInputEvent);
         }
 
@@ -91,17 +97,39 @@ namespace VldateSck
 
         void Update()
         {
-            if (!mCanFire && mHasFired)
-            {
-                mShotDelayTicker -= Time.deltaTime;
-            }
+        }
 
-            if (mHasFired && mShotDelayTicker <= 0.0f)
+        private IEnumerator AutoFire()
+        {
+            while(mFireButtonDown)
             {
-                mCanFire = true;
-                mHasFired = false;
-                mShotDelayTicker = 0.0f;
+                mCanFire = false;
+                DoFire();
+                yield return new WaitForSeconds(mShotDelayStart);
             }
+            mCanFire = true;
+        }
+
+        private IEnumerator BurstFire()
+        {
+            mCanFire = false;
+            int burstCount = mBurstCount;
+            while(burstCount > 0)
+            {
+                DoFire();
+                yield return new WaitForSeconds(mBurstDelay);
+                burstCount--;
+            }
+            yield return new WaitForSeconds(mShotDelayStart);
+            mCanFire = true;
+        }
+
+        private IEnumerator RegularFire()
+        {
+            mCanFire = false;
+            DoFire();
+            yield return new WaitForSeconds(mShotDelayStart);
+            mCanFire = true;
         }
 
         private void OnInputEvent(VldateSck.Input.InputLogical input, bool buttonDown)
@@ -109,7 +137,15 @@ namespace VldateSck
             // Attempt to fire.
             if(input == mFireInput)
             {
-                AttemptFire();
+                if(buttonDown)
+                {
+                    mFireButtonDown = true;
+                    AttemptFire();
+                }
+                else
+                {
+                    mFireButtonDown = false;
+                }
             }
         }
 
@@ -117,23 +153,36 @@ namespace VldateSck
         {
             if(mCanFire)
             {
-                mCanFire = false;
-                mHasFired = true;
-                mShotDelayTicker = mCurrentShotDelay;
-                // Fire.
-                GameObject instantiatedPrefab = GameObject.Instantiate(mProjectTilePrefab.gameObject);
-                if(instantiatedPrefab != null)
+                switch(mFireType)
                 {
-                    instantiatedPrefab.transform.position = mLaunchPoint.position;
-                    instantiatedPrefab.transform.rotation = mLaunchPoint.rotation;
+                    case FireType.Regular:
+                        StartCoroutine(RegularFire());
+                        break;
+                    case FireType.Auto:
+                        StartCoroutine(AutoFire());
+                        break;
+                    case FireType.Burst:
+                        StartCoroutine(BurstFire());
+                        break;
+                }
 
-                    Projectile projComp = instantiatedPrefab.GetComponent<Projectile>();
+            }
+        }
 
-                    if(projComp != null)
-                    {
-                        // We actually have a bullet.
-                        projComp.Fire(mVelocity, mDamageMin, mDamageMax);
-                    }
+        private void DoFire()
+        {
+            GameObject instantiatedPrefab = GameObject.Instantiate(mProjectTilePrefab.gameObject);
+            if (instantiatedPrefab != null)
+            {
+                instantiatedPrefab.transform.position = mLaunchPoint.position;
+                instantiatedPrefab.transform.rotation = mLaunchPoint.rotation;
+
+                Projectile projComp = instantiatedPrefab.GetComponent<Projectile>();
+
+                if (projComp != null)
+                {
+                    // We actually have a bullet.
+                    projComp.Fire(mVelocity, mDamageMin, mDamageMax);
                 }
             }
         }

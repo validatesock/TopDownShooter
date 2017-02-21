@@ -16,4 +16,11 @@
         Shell,
         Rocket,
     }
+
+    public enum FireType
+    {
+        Regular,
+        Auto,
+        Burst
+    }
 }
