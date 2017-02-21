@@ -78,6 +78,10 @@
     <Compile Include="Assets\Scripts\Framework\Singleton.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Character.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameplayEnums.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Gun.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\PickUp.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Projectile.cs" />
     <Compile Include="Assets\Scripts\Input\InputEnums.cs" />
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Input\InterfaceAbstraction.cs" />
