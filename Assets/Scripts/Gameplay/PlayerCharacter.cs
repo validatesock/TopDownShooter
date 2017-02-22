@@ -53,11 +53,9 @@ namespace VldateSck
 
         private void OnMovementEvent(VldateSck.Input.InputLogical input, bool buttonDown)
         {
-            Debug.Log("Input!1");
             // If we have movement input
             if (input >= Input.InputLogical.MOVEMENT_START && input <= Input.InputLogical.MOVEMENT_END)
             {
-                Debug.Log("Input!");
                 switch(input)
                 {
                     case Input.InputLogical.DPAD_FORWARD:
