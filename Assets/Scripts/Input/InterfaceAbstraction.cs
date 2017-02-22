@@ -103,13 +103,13 @@ namespace VldateSck
                         isDown = UnityEngine.Input.GetKeyDown(KeyCode.W);
                         break;
                     case InputLogical.DPAD_BACK:
-                        isDown = UnityEngine.Input.GetKeyDown(KeyCode.A);
+                        isDown = UnityEngine.Input.GetKeyDown(KeyCode.S);
                         break;
                     case InputLogical.DPAD_LEFT:
                         isDown = UnityEngine.Input.GetKeyDown(KeyCode.A);
                         break;
                     case InputLogical.DPAD_RIGHT:
-                        isDown = UnityEngine.Input.GetKeyDown(KeyCode.S);
+                        isDown = UnityEngine.Input.GetKeyDown(KeyCode.D);
                         break;
                     default:
                         Debug.LogError("Unsupported input: " + logicalInput);
@@ -153,13 +153,13 @@ namespace VldateSck
                         isUp = UnityEngine.Input.GetKeyUp(KeyCode.W);
                         break;
                     case InputLogical.DPAD_BACK:
-                        isUp = UnityEngine.Input.GetKeyUp(KeyCode.A);
+                        isUp = UnityEngine.Input.GetKeyUp(KeyCode.S);
                         break;
                     case InputLogical.DPAD_LEFT:
                         isUp = UnityEngine.Input.GetKeyUp(KeyCode.A);
                         break;
                     case InputLogical.DPAD_RIGHT:
-                        isUp = UnityEngine.Input.GetKeyUp(KeyCode.S);
+                        isUp = UnityEngine.Input.GetKeyUp(KeyCode.D);
                         break;
                     default:
                         Debug.LogError("Unsupported input: " + logicalInput);

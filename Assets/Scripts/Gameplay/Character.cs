@@ -13,23 +13,5 @@ namespace VldateSck
         [SerializeField]
         private float mMaxStamina;
         public float MaxStamina { get { return mMaxStamina; } }
-
-        [SerializeField]
-        private Gun mCurrentGun;
-
-        void Start()
-        {
-            VldateSck.InputManager.Instance.AddInputListener(OnInputEvent);
-        }
-
-        void OnDestroy()
-        {
-            VldateSck.InputManager.Instance.RemoveInputListener(OnInputEvent);
-        }
-
-        private void OnInputEvent(VldateSck.Input.InputLogical input, bool buttonDown)
-        {
-            // TODO: DO this!
-        }
     }
 }

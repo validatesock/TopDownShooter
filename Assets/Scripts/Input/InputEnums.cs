@@ -20,9 +20,11 @@
             CANCEL,
             BACK,
             DPAD_FORWARD,
+            MOVEMENT_START = DPAD_FORWARD,
             DPAD_BACK,
             DPAD_LEFT,
             DPAD_RIGHT,
+            MOVEMENT_END = DPAD_RIGHT
         }
     }
 }

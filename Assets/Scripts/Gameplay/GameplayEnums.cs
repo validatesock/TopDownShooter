@@ -23,4 +23,13 @@
         Auto,
         Burst
     }
+
+    public enum MovementDirection
+    {
+        Forward = 0,
+        Backward,
+        Left,
+        Right,
+        Count
+    }
 }
