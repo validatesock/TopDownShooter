@@ -34,4 +34,10 @@
         Right,
         Count
     }
+
+    public enum CharacterState
+    {
+        Alive = 0,
+        Dead
+    }
 }

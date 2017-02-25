@@ -62,6 +62,7 @@
         PlayerSelection,
         ResultsScreen,
         PauseMenu,
+        HUD,
         Credits
     }
 

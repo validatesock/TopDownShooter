@@ -59,8 +59,8 @@ namespace VldateSck
         public void Start()
         {
             // This is not something we want to keep in the start.
-            mPrompts.SetPromptsPlatform(InputPlatform.Win_Xbox);
-            TransitionToScreen(UIScreenId.Splash);
+            //mPrompts.SetPromptsPlatform(InputPlatform.Win_Xbox);
+            //TransitionToScreen(UIScreenId.Splash);
         }
 
         public void Update()

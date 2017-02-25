@@ -77,8 +77,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Framework\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Framework\VSEventManager.cs" />
+    <Compile Include="Assets\Scripts\Framework\VSGameEvent.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Character.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\CharacterCollisionDetector.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\EnemyCharacter.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameEvents.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameplayEnums.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Gun.cs" />
     <Compile Include="Assets\Scripts\Gameplay\PickUp.cs" />
@@ -95,6 +100,7 @@
     <Compile Include="Assets\Scripts\UI\UIBaseScreen.cs" />
     <Compile Include="Assets\Scripts\UI\UIButtonInfo.cs" />
     <Compile Include="Assets\Scripts\UI\UIEnums.cs" />
+    <Compile Include="Assets\Scripts\UI\UIHUDScreen.cs" />
     <Compile Include="Assets\Scripts\UI\UIMainMenuScreen.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIPromptButton.cs" />

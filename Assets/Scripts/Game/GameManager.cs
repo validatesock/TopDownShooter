@@ -11,11 +11,13 @@ namespace VldateSck
 
         [SerializeField]
         private PlayerCharacter mPlayerCharacter;
+        public PlayerCharacter PlayerCharacter { get { return mPlayerCharacter; } }
 
         // Use this for initialization
         void Start()
         {
             mCameraController.Initialize(mPlayerCharacter);
+            UIManager.Instance.TransitionToScreen(UIScreenId.HUD);
         }
 
         // Update is called once per frame

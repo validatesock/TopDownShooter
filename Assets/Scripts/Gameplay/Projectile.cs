@@ -24,6 +24,7 @@ namespace VldateSck
 
         // Projectile State
         private float mDamage = 0.0f;
+        public float Damage { get { return mDamage; } }
         private float mVelocity = 0.0f;
         private bool mIsFired = false;
         private float mShotDurationTicker = 0.0f;
