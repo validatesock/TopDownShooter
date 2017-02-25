@@ -32,10 +32,12 @@ namespace VldateSck
         // Keep track of input
         private bool[] mInputDirectionStates = new bool[(int)MovementDirection.Count] { false, false, false, false };
 
-        void Start()
+        public override void Start()
         {
             VldateSck.InputManager.Instance.AddInputListener(OnMovementEvent);
             VldateSck.InputManager.Instance.AddInputListener(OnInputEvent);
+
+            base.Start();
         }
 
         void OnDestroy()
