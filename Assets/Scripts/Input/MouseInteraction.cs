@@ -39,7 +39,7 @@ namespace VldateSck
 		private static bool MouseCast(out MouseInteractable hitInteractable)
 		{
 			hitInteractable = null;
-            mHitInfo = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition), Vector2.zero);
+            mHitInfo = Physics2D.Raycast(InputManager.Instance.MousePosition2D, Vector2.zero);
             if(mHitInfo)
             {
                 if (mHitInfo.collider != null) 

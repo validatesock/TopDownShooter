@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Gameplay\PickUp.cs" />
     <Compile Include="Assets\Scripts\Gameplay\PlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Reticle.cs" />
     <Compile Include="Assets\Scripts\Input\InputEnums.cs" />
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Input\InterfaceAbstraction.cs" />

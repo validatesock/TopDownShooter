@@ -6,13 +6,30 @@ namespace VldateSck
 {
     public class PlayerCharacter : Character
     {
+        // Components
         [SerializeField]
         private Gun mCurrentGun;
 
+        // Tunables
         [SerializeField]
         private float mVelocity = 10.0f;
 
-        // Keep track of inpuit
+        [SerializeField]
+        private float mDashVelocity = 30.0f;
+
+        [SerializeField]
+        private float mDashTime = 0.2f;
+
+        [SerializeField]
+        private float mDashCooldown = 1.0f;
+
+        // Dash 
+        private bool mCanDash = true;
+        private bool mIsDashing = false;
+        private Vector3 mDashDir = Vector3.zero;
+        private float mDashTicker = 0.0f;
+
+        // Keep track of input
         private bool[] mInputDirectionStates = new bool[(int)MovementDirection.Count] { false, false, false, false };
 
         void Start()
@@ -31,26 +48,59 @@ namespace VldateSck
         {
             Vector3 curPos = transform.position;
 
-            if (mInputDirectionStates[(int)MovementDirection.Forward])
+            if (!mIsDashing)
             {
-                curPos += transform.up * (mVelocity * Time.fixedDeltaTime);
+                if (mInputDirectionStates[(int)MovementDirection.Forward])
+                {
+                    curPos += transform.up * (mVelocity * Time.fixedDeltaTime);
+                }
+                if (mInputDirectionStates[(int)MovementDirection.Backward])
+                {
+                    curPos -= transform.up * (mVelocity * Time.fixedDeltaTime);
+                }
+                if (mInputDirectionStates[(int)MovementDirection.Left])
+                {
+                    curPos -= transform.right * (mVelocity * Time.fixedDeltaTime);
+                }
+                if (mInputDirectionStates[(int)MovementDirection.Right])
+                {
+                    curPos += transform.right * (mVelocity * Time.fixedDeltaTime);
+                }
             }
-            if (mInputDirectionStates[(int)MovementDirection.Backward])
+            else
             {
-                curPos -= transform.up * (mVelocity * Time.fixedDeltaTime);
-            }
-            if (mInputDirectionStates[(int)MovementDirection.Left])
-            {
-                curPos -= transform.right * (mVelocity * Time.fixedDeltaTime);
-            }
-            if (mInputDirectionStates[(int)MovementDirection.Right])
-            {
-                curPos += transform.right * (mVelocity * Time.fixedDeltaTime);
+                if (mDashTicker >= 0.0f)
+                {
+                    mDashTicker -= Time.fixedDeltaTime;
+                    curPos += mDashDir * (mDashVelocity * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    // End of DASH
+                    mIsDashing = false;
+                    mDashTicker = 0.0f;
+                    StartCoroutine(DoDashCooldown());
+                }
             }
 
             curPos.z = 0.0f;
-
             transform.position = curPos;
+        }
+
+        private void Dash()
+        {
+            Vector3 dashTarget = InputManager.Instance.MousePosition2D;
+            mDashDir = dashTarget - transform.position;
+            mDashDir = mDashDir.normalized;
+            mIsDashing = true;
+            mCanDash = false;
+            mDashTicker = mDashTime;
+        }
+
+        private IEnumerator DoDashCooldown()
+        {
+            yield return new WaitForSeconds(mDashCooldown);
+            mCanDash = true;
         }
 
         private void OnMovementEvent(VldateSck.Input.InputLogical input, bool buttonDown)
@@ -84,9 +134,18 @@ namespace VldateSck
             switch (input)
             {
                 case Input.InputLogical.SECONDARY_ACTION:
-                    if(!buttonDown)
+                    if(buttonDown)
                     {
                         mCurrentGun.ToggleFireMode();
+                    }
+                    break;
+                case Input.InputLogical.UNIQUE_ACTION:
+                    if(buttonDown)
+                    {
+                        if(!mIsDashing && mCanDash)
+                        {
+                            Dash();
+                        }
                     }
                     break;
                 default:

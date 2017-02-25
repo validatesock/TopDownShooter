@@ -90,8 +90,7 @@ namespace VldateSck
 
         void FixedUpdate()
         {
-            mMousePositionWS = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
-            mMousePositionWS.z = 0.0f;
+            mMousePositionWS = InputManager.Instance.MousePosition2D;
             transform.right = mMousePositionWS - transform.position;
         }
 

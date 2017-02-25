@@ -99,6 +99,9 @@ namespace VldateSck
                     case InputLogical.CANCEL:
                         isDown = UnityEngine.Input.GetKeyDown(KeyCode.Escape);
                         break;
+                    case InputLogical.UNIQUE_ACTION:
+                        isDown = UnityEngine.Input.GetKeyDown(KeyCode.Space);
+                        break;
                     case InputLogical.DPAD_FORWARD:
                         isDown = UnityEngine.Input.GetKeyDown(KeyCode.W);
                         break;
@@ -148,6 +151,9 @@ namespace VldateSck
                         break;
                     case InputLogical.CANCEL:
                         isUp = UnityEngine.Input.GetKeyUp(KeyCode.Escape);
+                        break;
+                    case InputLogical.UNIQUE_ACTION:
+                        isUp = UnityEngine.Input.GetKeyUp(KeyCode.Space);
                         break;
                     case InputLogical.DPAD_FORWARD:
                         isUp = UnityEngine.Input.GetKeyUp(KeyCode.W);

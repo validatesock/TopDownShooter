@@ -18,6 +18,16 @@ namespace VldateSck
 
         private MouseInteraction mMouseInteraction = null;
 
+        private Vector3 mMousePosition = Vector3.zero;
+        public Vector3 MousePosition2D
+        {
+            get
+            {
+                mMousePosition.z = 0.0f;
+                return mMousePosition;
+            }
+        }
+
         public override void Awake()
         {
             // TODO: Make this something I can set logically.
@@ -45,6 +55,11 @@ namespace VldateSck
             {
                 InputEventDelegate(input, buttonDown);
             }
+        }
+
+        void FixedUpdate()
+        {
+            mMousePosition = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
         }
 
         void Update()
@@ -102,6 +117,17 @@ namespace VldateSck
             if (VldateSck.Input.InterfaceAbstraction.GetButtonUp(Input.InputLogical.CANCEL))
             {
                 InvokeDelegate(Input.InputLogical.CANCEL, false);
+            }
+
+            // Unique Action
+            if (VldateSck.Input.InterfaceAbstraction.GetButtonDown(Input.InputLogical.UNIQUE_ACTION))
+            {
+                InvokeDelegate(Input.InputLogical.UNIQUE_ACTION, true);
+            }
+
+            if (VldateSck.Input.InterfaceAbstraction.GetButtonUp(Input.InputLogical.UNIQUE_ACTION))
+            {
+                InvokeDelegate(Input.InputLogical.UNIQUE_ACTION, false);
             }
 
             // Navigation DPAD FORWARD

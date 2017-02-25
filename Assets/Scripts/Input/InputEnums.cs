@@ -19,6 +19,7 @@
             MENU,
             CANCEL,
             BACK,
+            UNIQUE_ACTION,
             DPAD_FORWARD,
             MOVEMENT_START = DPAD_FORWARD,
             DPAD_BACK,
