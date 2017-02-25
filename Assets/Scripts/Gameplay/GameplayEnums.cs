@@ -19,9 +19,11 @@
 
     public enum FireType
     {
-        Regular,
+        Regular = 0,
+        First = Regular,
         Auto,
-        Burst
+        Burst,
+        Count
     }
 
     public enum MovementDirection

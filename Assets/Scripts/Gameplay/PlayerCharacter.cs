@@ -18,11 +18,13 @@ namespace VldateSck
         void Start()
         {
             VldateSck.InputManager.Instance.AddInputListener(OnMovementEvent);
+            VldateSck.InputManager.Instance.AddInputListener(OnInputEvent);
         }
 
         void OnDestroy()
         {
             VldateSck.InputManager.Instance.RemoveInputListener(OnMovementEvent);
+            VldateSck.InputManager.Instance.RemoveInputListener(OnInputEvent);
         }
 
         void FixedUpdate()
@@ -74,6 +76,21 @@ namespace VldateSck
                         Debug.LogError("Character movement event handler should not get here.");
                         break;
                 }
+            }
+        }
+
+        private void OnInputEvent(VldateSck.Input.InputLogical input, bool buttonDown)
+        {
+            switch (input)
+            {
+                case Input.InputLogical.SECONDARY_ACTION:
+                    if(!buttonDown)
+                    {
+                        mCurrentGun.ToggleFireMode();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

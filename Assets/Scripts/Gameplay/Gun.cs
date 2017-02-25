@@ -99,6 +99,19 @@ namespace VldateSck
         {
         }
 
+        public void ToggleFireMode()
+        {
+            int curType = (int)mFireType;
+            curType++;
+            if(curType >= (int)FireType.Count)
+            {
+                curType = (int)FireType.First;
+            }
+            mFireType = (FireType)curType;
+
+            mFireButtonDown = false;
+        }
+
         private IEnumerator AutoFire()
         {
             while(mFireButtonDown)
