@@ -31,5 +31,13 @@ namespace VldateSck
         {
             UIManager.Instance.OnUIInput(this);
         }
+
+        public void OnDestroy()
+        {
+            if(mButton != null)
+            {
+                mButton.onClick.RemoveListener(OnClick);
+            }
+        }
     }
 }
