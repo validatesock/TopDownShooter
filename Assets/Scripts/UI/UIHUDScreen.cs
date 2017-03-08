@@ -21,6 +21,8 @@ namespace VldateSck
 
         public override void Start()
         {
+            // TODO: Decouple UI and GP
+            GameManager.Instance.StartGame();
             base.Start();
         }
 

@@ -23,20 +23,20 @@ namespace VldateSck
 
         public override void SetPrompts()
         {
-            List<InputButton> lButtons = new List<InputButton>();
-            lButtons.Add(InputButton.A);
-            UIManager.Instance.Prompts.SetLeftPrompts(lButtons);
+            //List<InputButton> lButtons = new List<InputButton>();
+            //lButtons.Add(InputButton.A);
+            //UIManager.Instance.Prompts.SetLeftPrompts(lButtons);
 
-            List<InputButton> rButtons = new List<InputButton>();
-            rButtons.Add(InputButton.B);
-            UIManager.Instance.Prompts.SetRightPrompts(rButtons);
+            //List<InputButton> rButtons = new List<InputButton>();
+            //rButtons.Add(InputButton.B);
+            //UIManager.Instance.Prompts.SetRightPrompts(rButtons);
 
             base.SetPrompts();
         }
 
         public override void Shutdown()
         {
-            UIManager.Instance.Prompts.ClearPrompts();
+            //UIManager.Instance.Prompts.ClearPrompts();
             base.Shutdown();
         }
 

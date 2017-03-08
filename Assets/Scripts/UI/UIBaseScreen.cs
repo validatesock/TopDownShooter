@@ -128,6 +128,10 @@ namespace VldateSck
             {
                 mAnimator.SetTrigger(GetAnimatorParamFromState(state));
             }
+            else
+            {
+                UIManager.Instance.Set2DAnimLock(false);
+            }
         }
 
         private string GetAnimatorParamFromState(UIScreenAnimState state)
